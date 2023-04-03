@@ -1,14 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import GithubContext from "../../context/github/GithubContext";
 import UserItem from "./UserItem";
 import Spinner from "../layout/Spinner";
 function UserResults() {
   // hooks
-  const { users, loading, fetchUsers } = useContext(GithubContext);
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
+  const { users, loading } = useContext(GithubContext);
+  console.log(users);
   if (!loading) {
     return (
       <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

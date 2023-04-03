@@ -1,6 +1,26 @@
+import { useState, useContext } from "react";
+import GithubContext from "../../context/github/GithubContext";
 function SearchUser() {
+  // hooks
+  const { searchUsers } = useContext(GithubContext);
+  const [text, setText] = useState("");
+  // hanlde input changes
+  const handleChange = (e) => {
+    setText(e.target.value);
+  };
+  // handle form submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (text === "") {
+      alert("please enter something");
+    } else {
+      searchUsers(text);
+      setText("");
+    }
+  };
+
   return (
-    <div className="form-control">
+    <form onSubmit={handleSubmit} className="form-control">
       <div className="mx-auto">
         <div className="label">
           <span className="label-text">Search for users on Github</span>
@@ -9,9 +29,11 @@ function SearchUser() {
           <input
             type="text"
             placeholder="Search…"
+            value={text}
             className="input input-bordered w-96 focus:border-accent"
+            onChange={handleChange}
           />
-          <button className="btn btn-square">
+          <button type="submit" className="btn btn-square">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -29,7 +51,7 @@ function SearchUser() {
           </button>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
 
