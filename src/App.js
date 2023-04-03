@@ -13,6 +13,7 @@ function App() {
       <BrowserRouter>
         <div className="h-screen flex flex-col justify-between">
           <Navbar />
+
           <main className="container mx-auto my-8">
             <Routes>
               <Route path="/" element={<Home />} />
@@ -21,6 +22,7 @@ function App() {
               <Route path="/*" element={<NotFound />} />
             </Routes>
           </main>
+
           <Footer />
         </div>
       </BrowserRouter>
