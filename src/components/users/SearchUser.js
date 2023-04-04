@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import GithubContext from "../../context/github/GithubContext";
 function SearchUser() {
   // hooks
-  const { searchUsers } = useContext(GithubContext);
+  const { users, dispach, searchUsers } = useContext(GithubContext);
   const [text, setText] = useState("");
   // hanlde input changes
   const handleChange = (e) => {
@@ -49,6 +49,18 @@ function SearchUser() {
               />
             </svg>
           </button>
+          {users.length > 0 && (
+            <div>
+              <button
+                onClick={() => {
+                  dispach({ type: "CLEAR_USERS" });
+                }}
+                className="btn btn-ghost ml-2"
+              >
+                Clear
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </form>
