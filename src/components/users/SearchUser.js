@@ -1,8 +1,10 @@
 import { useState, useContext } from "react";
 import GithubContext from "../../context/github/GithubContext";
+import AlertContext from "../../context/Alert/AlertContext";
 function SearchUser() {
   // hooks
   const { users, dispach, searchUsers } = useContext(GithubContext);
+  const { setAlert } = useContext(AlertContext);
   const [text, setText] = useState("");
   // hanlde input changes
   const handleChange = (e) => {
@@ -12,7 +14,7 @@ function SearchUser() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (text === "") {
-      alert("please enter something");
+      setAlert("error", "please enter something...");
     } else {
       searchUsers(text);
       setText("");
@@ -22,10 +24,7 @@ function SearchUser() {
   return (
     <form onSubmit={handleSubmit} className="form-control">
       <div className="mx-auto">
-        <div className="label">
-          <span className="label-text">Search for users on Github</span>
-        </div>
-        <div className="input-group">
+        <div className="input-group flex-wrap justify-center">
           <input
             type="text"
             placeholder="Search…"
