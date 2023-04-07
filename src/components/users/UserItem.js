@@ -1,12 +1,7 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-
-import GithubContext from "../../context/github/GithubContext";
 
 function UserItem({ user }) {
   // hooks
-  const { fetchUser } = useContext(GithubContext);
-
   return (
     <div className="card compact side shadow-md bg-base-100">
       <div className="card-body flex-row items-center space-x-4">
@@ -20,7 +15,6 @@ function UserItem({ user }) {
           <Link
             className="text-base-content text-opacity-40"
             to={`/user/${user.login}`}
-            onClick={() => fetchUser(user)}
           >
             visit profile
           </Link>

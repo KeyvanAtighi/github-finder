@@ -11,7 +11,7 @@ export const GithubProvider = ({ children }) => {
   // init of global state
   const initialState = {
     users: [],
-    user: null,
+    user: {},
     loading: false,
   };
 
@@ -37,18 +37,23 @@ export const GithubProvider = ({ children }) => {
       payload: { items },
     });
   };
+
   // fetch single user
-  const fetchUser = async (user) => {
-    const response = await fetch(`${GITHUB_URL}/users/${user.login}`, {
+  const fetchUser = async (login) => {
+    const response = await fetch(`${GITHUB_URL}/users/${login}`, {
       headers: { Authorization: `token${GITHUB_TOKEN}` },
     });
 
-    const data = await response.json();
+    if (response.status === 404) {
+      window.location = "/notfound";
+    } else {
+      const data = await response.json();
 
-    dispach({
-      type: "GET_USER",
-      payload: { data },
-    });
+      dispach({
+        type: "GET_USER",
+        payload: { data },
+      });
+    }
   };
 
   // set loading
@@ -57,7 +62,6 @@ export const GithubProvider = ({ children }) => {
       type: "SET_LOADING",
     });
   };
-  console.log(state.user);
   return (
     <GithubContext.Provider
       value={{
