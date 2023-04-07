@@ -2,7 +2,7 @@ import { FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
 function Navbar() {
   return (
-    <navbar className="navbar bg-neutral drop-shadow-lg">
+    <nav className="navbar bg-neutral drop-shadow-lg">
       <div className="container mx-auto">
         <div className="flex-1">
           <Link to={"/"} className="btn btn-ghost">
@@ -21,7 +21,7 @@ function Navbar() {
           </ul>
         </div>
       </div>
-    </navbar>
+    </nav>
   );
 }
 
