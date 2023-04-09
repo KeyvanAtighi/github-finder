@@ -155,67 +155,47 @@ function User() {
           {/* coutable info card */}
           <div className="card row-span-2 bg-neutral">
             <div className="stats stats-vertical bg-neutral w-4/5 m-auto">
-              <div className="stat mb-16">
-                <div className="stat-figure">
-                  <FaCode className="text-3xl" />
+              {[
+                [
+                  "repositories",
+                  user.public_repos,
+                  <FaCode className="text-3xl" />,
+                ],
+                [
+                  "followers",
+                  user.followers,
+                  <FaUserFriends className="text-3xl" />,
+                ],
+                [
+                  "following",
+                  user.following,
+                  <FaUserCheck className="text-3xl" />,
+                ],
+                ["gists", user.public_gists, <FaStore className="text-3xl" />],
+              ].map(([title, value, icon]) => (
+                <div className="stat mb-16">
+                  <div className="stat-figure">{icon}</div>
+                  <div className="stat-title">{title}</div>
+                  <div className="stat-value transition duration-400 hover:text-primary">
+                    {title === "gists" && (
+                      <a
+                        href={`https://gist.github.com/${user.login}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {value}
+                      </a>
+                    )}
+                    <a
+                      href={`https://github.com/${user.login}?tab=${title}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {value}
+                    </a>
+                  </div>
                 </div>
-                <div className="stat-title">public repos</div>
-                <div className="stat-value transition duration-400 hover:text-primary">
-                  <a
-                    href={`https://github.com/${user.login}?tab=repositories`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {user.public_repos}
-                  </a>
-                </div>
-              </div>
-
-              <div className="stat mb-16">
-                <div className="stat-figure">
-                  <FaUserFriends className="text-3xl" />
-                </div>
-                <div className="stat-title">followers</div>
-                <div className="stat-value transition duration-400 hover:text-primary">
-                  <a
-                    href={`https://github.com/${user.login}?tab=followers`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {user.followers}
-                  </a>
-                </div>
-              </div>
-              <div className="stat mb-16">
-                <div className="stat-figure">
-                  <FaUserCheck className="text-3xl" />
-                </div>
-                <div className="stat-title">following</div>
-                <div className="stat-value transition duration-400 hover:text-primary">
-                  <a
-                    href={`https://github.com/${user.login}?tab=following`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {user.following}
-                  </a>
-                </div>
-              </div>
-              <div className="stat mb-16">
-                <div className="stat-figure">
-                  <FaStore className="text-3xl" />
-                </div>
-                <div className="stat-title">public gists</div>
-                <div className="stat-value transition duration-400 hover:text-primary">
-                  <a
-                    href={`https://github.com/${user.login}?tab=gists`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {user.public_gists}
-                  </a>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           {/* repos cad */}
