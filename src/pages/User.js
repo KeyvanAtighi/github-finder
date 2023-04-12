@@ -2,15 +2,16 @@ import { useContext, useEffect } from "react";
 import GithubContext from "../context/github/GithubContext";
 import { useParams } from "react-router-dom";
 import { FaCode, FaUserCheck, FaUserFriends, FaStore } from "react-icons/fa";
+import ReposList from "../components/repos/ReposList";
 function User() {
   // hooks
-  const { user, fetchUser } = useContext(GithubContext);
+  const { user, fetchUser, fetchRepos } = useContext(GithubContext);
   const params = useParams();
 
   useEffect(() => {
     fetchUser(params.login);
+    fetchRepos(params.login);
   }, []);
-
   // company
   // :
   // null
@@ -77,7 +78,7 @@ function User() {
   return (
     <>
       <div className="container">
-        <div className="grid grid-cols-1 gap-4 xl:grid-cols-4 xl:grid-rows-3">
+        <div className="grid grid-cols-4 gap-4">
           {/* info card */}
           <div className="card card-side col-span-3 bg-neutral shadow-xl">
             {/* child figure card */}
@@ -153,7 +154,7 @@ function User() {
             </div>
           </div>
           {/* coutable info card */}
-          <div className="card row-span-2 bg-neutral">
+          <div className="card bg-neutral shadow-xl">
             <div className="stats stats-vertical bg-neutral w-4/5 m-auto">
               {[
                 [
@@ -173,7 +174,7 @@ function User() {
                 ],
                 ["gists", user.public_gists, <FaStore className="text-3xl" />],
               ].map(([title, value, icon]) => (
-                <div className="stat mb-16">
+                <div className="stat">
                   <div className="stat-figure">{icon}</div>
                   <div className="stat-title">{title}</div>
                   <div className="stat-value transition duration-400 hover:text-primary">
@@ -198,8 +199,8 @@ function User() {
               ))}
             </div>
           </div>
-          {/* repos cad */}
-          <div className="card col-span-3 bg-neutral"> </div>
+          {/* repos card */}
+          <ReposList />
         </div>
       </div>
     </>
